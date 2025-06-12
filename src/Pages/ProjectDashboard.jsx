@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
-import './ProjectDashboard.css' 
+import '../assets/ProjectDashboard.css' 
+import {Link} from "react-router-dom"
+import {Sidebar} from '../Components/Sidebar'
 
 function ProjectDashboard() {
 
@@ -32,21 +34,9 @@ function ProjectDashboard() {
             
             </div>
 
-            <div class="sidebar">
-                    <div class="tools">
-                        <h3>Toolbar</h3>
-                        <a href="https://github.com"> Project Dashboard</a>
-                        
-                        <a href="https://github.com/gnuslashlaith">Calendar View</a>
-                        <a href="https://github.com/gnuslashlaith">Daily Checklist</a>
-                        <a href="https://github.com/gnuslashlaith">Pomorodo Timer</a>
+            <Sidebar/>
 
-                        <h3>Information</h3>
-                        <a href="https://github.com/gnuslashlaith/projectmanager">Source Code</a>
-                        <a href="https://github.com/gnuslashlaith">Github Profile</a>
-                    </div>
-
-                </div>
+            
 
         </>
 
