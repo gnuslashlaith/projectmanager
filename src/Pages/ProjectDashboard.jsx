@@ -56,6 +56,11 @@ function ProjectDashboard() {
 
                         <input className="project-details" type="text" placeholder="enter project description." value={newProject.description} onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}></input>
                         <span className="project-highlight"></span>
+
+                        <input className="dateStart" type="date" placeholder='Enter start date' value={newProject.startDate} onChange={(e) => setNewProject({...newProject, startDate: e.target.value})}></input>
+                        <p class="label">To</p>
+                        <input className="dateEnd" type="date" placeholder='Enter end date' value={newProject.goalDate} onChange={(e) => setNewProject({...newProject, goalDate: e.target.value})}></input>
+
                         <button class="add-project" onClick={addProject}>add project</button>
 
                     
@@ -70,6 +75,7 @@ function ProjectDashboard() {
                         <div class="project-card" key={index}>
                             <a href="https://github.com" class="card-name">{project.name}</a>
                             <p class="sub">{project.description}</p>
+                            <p class="sub">Start: {project.startDate} Goal: {project.goalDate}</p>
                             <button class="delete-project" onClick={() => deleteProject(index)}>-</button>
                         </div>
                     )}
