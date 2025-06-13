@@ -10,39 +10,23 @@ function ProjectDashboard() {
         return storedProjects ? JSON.parse(storedProjects) : [];
     });
 
-    const [newProject, setNewProject] = useState([]);
-
-    const [desc, setDesc] = useState(() => {
-        const storedDesc = localStorage.getItem('desc');
-        return storedDesc ? JSON.parse(storedDesc): [];
+    const [newProject, setNewProject] = useState({
+        name: '',
+        description: '',
+        startDate: '',
+        goalDate: '',
     });
-    const [newDesc, setNewDesc] = useState([]);
-
-    const [isVisible, setIsVisible] = useState(false);
-    const toggleDiv = () => setIsVisible((prev) => !prev);
-
 
     useEffect(() => {
         localStorage.setItem('projects', JSON.stringify(projects));
     }, [projects]);
 
-    useEffect(() => {
-        localStorage.setItem('desc', JSON.stringify(desc));
-    }, [desc]);
-
-
-
-    function handleInputTitle(event) {
-        setNewProject(event.target.value);
-    }
-
-    function handleInputDesc(event) {
-        setNewDesc(event.target.value);
-    }
+    const [isVisible, setIsVisible] = useState(false);
+    const toggleDiv = () => setIsVisible((prev) => !prev);
 
     function addProject() {
         setProjects(p => [...p, newProject])
-        setNewProject("");
+        setNewProject({name: '', description: '', startDate: '', endDate: ''});
     }
 
     function deleteProject(index) {
@@ -57,29 +41,35 @@ function ProjectDashboard() {
             <div class="main">
                 <h1>Project Dashboard</h1>
 
-                <button onClick={toggleDiv}>
-                    {isVisible ? "Hide Content": "Show Content"}
+                <button class="toggle" onClick={toggleDiv}>
+                    {isVisible ? "^": "+"}
                 </button>
+
                 
                 
                 {isVisible && (
                     <div id="projectDetailContainer">
-                        <input type="text" placeholder="enter project name." value={newProject} onChange={handleInputTitle}>
+                        <br></br>
+                        <br></br>
+                        <input className="project-details" type="text" placeholder="enter project name." value={newProject.name} onChange={(e) => setNewProject({ ...newProject, name: e.target.value })}></input>
+                        <span className="project-highlight"></span>
+
+                        <input className="project-details" type="text" placeholder="enter project description." value={newProject.description} onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}></input>
+                        <span className="project-highlight"></span>
+                        <button class="add-project" onClick={addProject}>add project</button>
+
                     
-                        </input>
+                    </div>
 
-                        <input type="text" placeholder="enter description." value={newDesc} onChange={handleInputDesc}></input>
 
-                    <button class="add-project" onClick={addProject}>add project</button>
-                </div>
 
                 )}
 
-                <div class="project-list">
+                <div class="project-list"> 
                     {projects.map((project, index) =>
                         <div class="project-card" key={index}>
-                            <a href="https://github.com" class="card-name">{project}</a>
-                            <p class="sub">{desc}</p>
+                            <a href="https://github.com" class="card-name">{project.name}</a>
+                            <p class="sub">{project.description}</p>
                             <button class="delete-project" onClick={() => deleteProject(index)}>-</button>
                         </div>
                     )}

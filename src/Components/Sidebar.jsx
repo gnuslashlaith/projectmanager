@@ -17,6 +17,7 @@ export function Sidebar() {
                 <h3>Information</h3>
                 <a href="https://github.com/gnuslashlaith/projectmanager">Source Code</a>
                 <a href="https://github.com/gnuslashlaith">Github Profile</a>
+                <a href="https://github.com/gnuslashlaith/Portfolio">Personal Website</a>
             </div>
     </div>
         </>
