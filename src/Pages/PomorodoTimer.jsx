@@ -6,7 +6,16 @@ import {Sidebar} from '../Components/Sidebar'
 function PomorodoTimer() {
 
     return(
-        <></>
+        <>
+            <div>
+                <h1 class="pomoTitle">Pomorodo Timer</h1>
+            </div>
+
+            <Sidebar/>
+        
+        
+        </>
+
     );
 }
 
