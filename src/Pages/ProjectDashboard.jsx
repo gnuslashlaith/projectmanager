@@ -24,16 +24,21 @@ function ProjectDashboard() {
     const [isVisible, setIsVisible] = useState(false);
     const toggleDiv = () => setIsVisible((prev) => !prev);
 
-    function addProject() {
-        setProjects(p => [...p, newProject])
-        setNewProject({name: '', description: '', startDate: '', endDate: ''});
-    }
 
     function deleteProject(index) {
         const updatedProjects = projects.filter((_, i) => i!== index);
         setProjects(updatedProjects);
     }
 
+    function addProject() {
+        if(!newProject.name) return;
+        const projectWithId = {
+            ...newProject, 
+            id: Date.now().toString(),
+        };
+        setProjects(p => [...p, projectWithId])
+        setNewProject({name: '', description: '', startDate: '', endDate: ''});
+    }
 
 
     return ( 
@@ -72,10 +77,11 @@ function ProjectDashboard() {
 
                 <div class="project-list"> 
                     {projects.map((project, index) =>
-                        <div class="project-card" key={index}>
-                            <a href="https://github.com" class="card-name">{project.name}</a>
+                        <div class="project-card" key={project.id || index}>
+                            <Link to={`/project/${project.id}`} class="card-name">{project.name}</Link>
                             <p class="sub">{project.description}</p>
                             <p class="sub">Start: {project.startDate} Goal: {project.goalDate}</p>
+
                             <button class="delete-project" onClick={() => deleteProject(index)}>-</button>
                         </div>
                     )}
