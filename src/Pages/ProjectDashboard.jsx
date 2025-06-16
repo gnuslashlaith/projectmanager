@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import {v4 as uuid} from "uuid";
 import '../assets/ProjectDashboard.css' 
 import {Link} from "react-router-dom"
 import {Sidebar} from '../Components/Sidebar'
@@ -6,7 +7,7 @@ import {Sidebar} from '../Components/Sidebar'
 function ProjectDashboard() {
 
     const [projects, setProjects] = useState(() => {
-        const storedProjects= localStorage.getItem('projects');;
+        const storedProjects= localStorage.getItem('projects');
         return storedProjects ? JSON.parse(storedProjects) : [];
     });
 
@@ -20,6 +21,7 @@ function ProjectDashboard() {
     useEffect(() => {
         localStorage.setItem('projects', JSON.stringify(projects));
     }, [projects]);
+    
 
     const [isVisible, setIsVisible] = useState(false);
     const toggleDiv = () => setIsVisible((prev) => !prev);
@@ -31,10 +33,9 @@ function ProjectDashboard() {
     }
 
     function addProject() {
-        if(!newProject.name) return;
         const projectWithId = {
-            ...newProject, 
-            id: Date.now().toString(),
+            ...newProject,
+            id: uuid(),
         };
         setProjects(p => [...p, projectWithId])
         setNewProject({name: '', description: '', startDate: '', endDate: ''});
@@ -78,7 +79,7 @@ function ProjectDashboard() {
                 <div class="project-list"> 
                     {projects.map((project, index) =>
                         <div class="project-card" key={project.id || index}>
-                            <Link to={`/project/${project.id}`} class="card-name">{project.name}</Link>
+                            <Link to={`/project/${project.id}`}class="card-name">{project.name}</Link>
                             <p class="sub">{project.description}</p>
                             <p class="sub">Start: {project.startDate} Goal: {project.goalDate}</p>
 
