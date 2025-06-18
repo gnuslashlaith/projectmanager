@@ -28,16 +28,21 @@ function ProjectDashboard() {
 
 
     function deleteProject(index) {
-        const updatedProjects = projects.filter((_, i) => i!== index);
-        setProjects(updatedProjects);
+
+       if (window.confirm("Are you sure you want to remove this project? This cannot be undone.")) {
+            const updatedProjects = projects.filter((_, i) => i!== index);
+            setProjects(updatedProjects);
+       } else {
+        return;
+       } 
     }
 
-    function addProject() {
+    const addProject = () => {
         const projectWithId = {
             ...newProject,
             id: uuid(),
         };
-        setProjects(p => [...p, projectWithId])
+        setProjects(p => [...p, projectWithId]);
         setNewProject({name: '', description: '', startDate: '', endDate: ''});
     }
 
