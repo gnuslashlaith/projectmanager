@@ -32,6 +32,7 @@ export function ProjectTemplate({data}) {
     return(
         <>
             <h1 class="project-title-h1">{project.name}</h1>
+            <p class="desc">Outline your progress here. Blue icons are larger milestones. Beginning, middle, end. The rest are weekly goals you can hit for yourself.</p>
             <div class="project-information">
                 <h4 style={{color: "white"}}>Started: {project.startDate}</h4>
                 <h4 style={{color: "white"}}>Target Completion: {project.goalDate}</h4>
