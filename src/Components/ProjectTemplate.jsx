@@ -4,6 +4,7 @@ import Sidebar from "./Sidebar";
 import '../assets/ProjectTemplate.css'
 import ReminderText from "./ReminderText";
 import PriorityIconOrange from "./PriorityIconOrange";
+import PriorityIconBlue from "./PriorityIconBlue";
 
 
 /* TODO:
@@ -49,7 +50,10 @@ export function ProjectTemplate({data}) {
 
             </div>
 
-            <div class="task-priority-white">
+            <div class="task-priority-blue">
+               <PriorityIconBlue></PriorityIconBlue> 
+               <input className="task-input-priority task-blue" type="text" placeholder="What step are you going to take before entering the next milestone?"></input>
+               <input type="checkbox"></input>
 
             </div>
 

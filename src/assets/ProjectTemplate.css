@@ -29,12 +29,17 @@
     left: 25vh;
     height: 100px;
 }
+.circle-blue {
+  height: 50px;
+  margin-left: 80vh;
+}
 @media (prefers-reduced-motion: no-preference) {
-  .circle-orange-move {
+  .circle-orange-move, .circle-blue {
     animation: circle-orange-spin infinite 20s linear;
+    animation: circle-blue-spin infinite 20s linear;
   }
 }
-@keyframes circle-orange-spin{
+@keyframes circle-orange-spin {
   from {
     transform: rotate(90deg);
   }
@@ -42,6 +47,16 @@
     transform: rotate(-90deg);
   }
 }
+
+@keyframes circle-blue-spin {
+  from {
+    transform: rotate(90deg);
+  }
+  to {
+    transform: rotation(-90deg);
+  }
+}
+
 
 .task-input-priority {
     background-color: transparent;
