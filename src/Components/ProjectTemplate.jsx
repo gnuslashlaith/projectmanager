@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import '../assets/ProjectTemplate.css'
 import ReminderText from "./ReminderText";
+import PriorityIconOrange from "./PriorityIconOrange";
 
 
 /* TODO:
@@ -38,6 +39,19 @@ export function ProjectTemplate({data}) {
                 <h4 style={{color: "white"}}>Target Completion: {project.goalDate}</h4>
             </div>
             <ReminderText/>
+            <br></br>
+            
+            <div class="task-priority-orange">
+
+                <PriorityIconOrange></PriorityIconOrange>
+                <input className="task-input-priority" type="text" placeholder="What are you starting with?"></input>
+                <input type="checkbox"></input>
+
+            </div>
+
+            <div class="task-priority-white">
+
+            </div>
 
             <Sidebar/>
 
