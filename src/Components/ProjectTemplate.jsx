@@ -27,6 +27,15 @@ export function ProjectTemplate({data}) {
     }, [id]);
 
 
+    function completedTask() {
+
+    }
+
+    function undoComplete() {
+        
+    }
+
+
 
     if (!project) return <p style={{color: "white"}}>What project?</p>
 
@@ -46,7 +55,8 @@ export function ProjectTemplate({data}) {
 
                 <PriorityIconOrange></PriorityIconOrange>
                 <input className="task-input-priority" type="text" placeholder="What are you starting with?"></input>
-                <input type="checkbox"></input>
+                <button class="mark-complete" onClick={completedTask}>Mark Complete</button>
+                <button class="undo-complete" onClick={undoComplete}>Undo</button>
 
             </div>
 
