@@ -16,6 +16,8 @@ import PriorityIconBlue from "./PriorityIconBlue";
 */
 export function ProjectTemplate({data}) {
 
+    
+
     const {id} = useParams();
     const [project, setProject] = useState(null);
 
@@ -26,14 +28,28 @@ export function ProjectTemplate({data}) {
         setProject(found);
     }, [id]);
 
+    const [goals, setGoals] = useState('');
+    const [isReadonly, setIsReadonly] = useState(true);
+    useEffect(() => {
+        const savedGoal = localStorage.getItem('todo');
+        if(savedGoal !== null) {
+            setGoals(savedGoal);
+            setIsReadonly(true);
+            
+        }
+    }, [])
 
-    function completedTask() {
+    const handleComplete = () => {
+        localStorage.setItem('todo', goals);
+        setIsReadonly(true);
 
-    }
+    };
 
-    function undoComplete() {
-        
-    }
+    const handleEdit = () => {
+        setIsReadonly(false);
+    };
+
+
 
 
 
@@ -53,15 +69,13 @@ export function ProjectTemplate({data}) {
             
             <div class="task-priority-orange">
 
-                <PriorityIconOrange></PriorityIconOrange>
-                <input className="task-input-priority" type="text" placeholder="What are you starting with?"></input>
-                <button class="mark-complete" onClick={completedTask}>Mark Complete</button>
-                <button class="undo-complete" onClick={undoComplete}>Undo</button>
+                <input readOnly={isReadonly} value={goals} onChange={(e) => setGoals(e.target.value)}className="task-input-priority" type="text" placeholder="What are you starting with?"></input>
+                <button class="mark-complete" onClick={handleComplete}>Mark Complete</button>
+                <button class="undo-complete" onClick={handleEdit}>Edit</button>
 
             </div>
 
             <div class="task-priority-blue">
-               <PriorityIconBlue></PriorityIconBlue> 
                <input className="task-input-priority task-blue" type="text" placeholder="What step are you going to take before entering the next milestone?"></input>
                <input type="checkbox"></input>
 
