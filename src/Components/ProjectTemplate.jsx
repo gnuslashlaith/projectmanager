@@ -3,12 +3,9 @@ import { useParams } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import '../assets/ProjectTemplate.css'
 import ReminderText from "./ReminderText";
-import PriorityIconOrange from "./PriorityIconOrange";
-import PriorityIconBlue from "./PriorityIconBlue";
 
 
 /* TODO:
-* 
 * Create UI for Project Pages
 * Add TO-DO list function (completed, delete, move)
 * Finish Pomorodo Timer
@@ -16,10 +13,50 @@ import PriorityIconBlue from "./PriorityIconBlue";
 */
 export function ProjectTemplate({data}) {
 
-    
-
+    // export data from project dashboard
     const {id} = useParams();
     const [project, setProject] = useState(null);
+
+    const [goalText, setGoalText] = useState({
+        PriorityOrangeOne: '',
+        PriorityBlueOne: '',
+        PriorityBlueTwo: '',
+        PriorityBlueThree: '',
+        PriorityOrangeTwo: '',
+        PriorityBlueFour: '',
+        PriorityBlueFive: '',
+        PriorityBlueSix: '',
+        PriorityOrangeThree: '',
+    });
+
+
+
+    const handleTextChange = (event) => {
+        const {name, value} = event.target;
+        setGoalText(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+
+    };
+
+    useEffect(() => {
+        const saved = localStorage.getItem('goal');
+        if(saved) {
+            try {
+
+                setGoalText(JSON.parse(saved));
+            }
+            catch(e) {
+                console.error("error parsing saved goal: ", e);
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('goal', JSON.stringify(goalText));
+    }, [goalText]);
+
 
 
     useEffect(() => {
@@ -28,32 +65,10 @@ export function ProjectTemplate({data}) {
         setProject(found);
     }, [id]);
 
-    const [goals, setGoals] = useState('');
-    const [isReadonly, setIsReadonly] = useState(true);
-    useEffect(() => {
-        const savedGoal = localStorage.getItem('todo');
-        if(savedGoal !== null) {
-            setGoals(savedGoal);
-            setIsReadonly(true);
-            
-        }
-    }, [])
-
-    const handleComplete = () => {
-        localStorage.setItem('todo', goals);
-        setIsReadonly(true);
-
-    };
-
-    const handleEdit = () => {
-        setIsReadonly(false);
-    };
-
-
-
-
 
     if (!project) return <p style={{color: "white"}}>What project?</p>
+
+
 
 
     return(
@@ -66,20 +81,32 @@ export function ProjectTemplate({data}) {
             </div>
             <ReminderText/>
             <br></br>
-            
+
             <div class="task-priority-orange">
-
-                <input readOnly={isReadonly} value={goals} onChange={(e) => setGoals(e.target.value)}className="task-input-priority" type="text" placeholder="What are you starting with?"></input>
-                <button class="mark-complete" onClick={handleComplete}>Mark Complete</button>
-                <button class="undo-complete" onClick={handleEdit}>Edit</button>
-
+                <textarea name="PriorityOrangeOne" value={goalText.PriorityOrangeOne} onChange={handleTextChange}/>
+                
             </div>
 
             <div class="task-priority-blue">
-               <input className="task-input-priority task-blue" type="text" placeholder="What step are you going to take before entering the next milestone?"></input>
-               <input type="checkbox"></input>
-
+                <textarea name="PriorityBlueOne" value={goalText.PriorityBlueOne} onChange={handleTextChange}/>
+                <textarea name="PriorityBlueTwo" value={goalText.PriorityBlueTwo} onChange={handleTextChange}/>
+                <textarea name="PriorityBlueThree" value={goalText.PriorityBlueThree} onChange={handleTextChange}/>
             </div>
+
+            <div class="task-priority-orange">
+                <textarea name="PriorityOrangeTwo" value={goalText.PriorityOrangeTwo} onChange={handleTextChange}/>
+            </div>
+
+            <div class="task-priority-blue">
+                <textarea name="PriorityBlueFour" value={goalText.PriorityBlueFour} onChange={handleTextChange}/>
+                <textarea name="PriorityBlueFive" value={goalText.PriorityBlueFive} onChange={handleTextChange}/>
+                <textarea name="PriorityBlueSix" value={goalText.PriorityBlueSix}  onChange={handleTextChange}/>
+            </div>
+
+            <div class="task-priority-orange">
+                <textarea name="PriorityOrangeThree" value={goalText.PriorityOrangeThree} onChange={handleTextChange}/>
+            </div>
+            
 
             <Sidebar/>
 
