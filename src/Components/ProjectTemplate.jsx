@@ -18,15 +18,15 @@ export function ProjectTemplate({data}) {
     const [project, setProject] = useState(null);
 
     const [goalText, setGoalText] = useState({
-        PriorityOrangeOne: '',
-        PriorityBlueOne: '',
-        PriorityBlueTwo: '',
-        PriorityBlueThree: '',
-        PriorityOrangeTwo: '',
-        PriorityBlueFour: '',
-        PriorityBlueFive: '',
-        PriorityBlueSix: '',
-        PriorityOrangeThree: '',
+        PriorityOrangeOne: {value: '', readOnly: true},
+        PriorityBlueOne: {value: '', readOnly: true},
+        PriorityBlueTwo: {value: '', readOnly: true},
+        PriorityBlueThree: {value: '', readOnly: true},
+        PriorityOrangeTwo: {value: '', readOnly: true},
+        PriorityBlueFour: {value: '', readOnly: true},
+        PriorityBlueFive: {value: '', readOnly: true},
+        PriorityBlueSix: {value: '', readOnly: true},
+        PriorityOrangeThree: {value: '', readOnly: true},
     });
 
 
@@ -35,27 +35,31 @@ export function ProjectTemplate({data}) {
         const {name, value} = event.target;
         setGoalText(prevState => ({
             ...prevState,
-            [name]: value
+            [name]: {
+                ...prevState[name],
+                value: value
+            }
         }));
 
     };
 
+    const setReadOnly = (name, isReadOnly) => {
+        setGoalText(prevState => ({
+            ...prevState,
+            [name]: {
+                ...prevState[name],
+                readOnly: isReadOnly
+            }
+        }));
+    };
+
     useEffect(() => {
-        const saved = localStorage.getItem('goal');
+        const saved = localStorage.getItem(`goal-${id}`);
         if(saved) {
-            try {
-
                 setGoalText(JSON.parse(saved));
-            }
-            catch(e) {
-                console.error("error parsing saved goal: ", e);
-            }
         }
-    }, []);
+    }, [id]);
 
-    useEffect(() => {
-        localStorage.setItem('goal', JSON.stringify(goalText));
-    }, [goalText]);
 
 
 
@@ -63,7 +67,11 @@ export function ProjectTemplate({data}) {
         const storedProjects = JSON.parse(localStorage.getItem('projects')) || [];
         const found = storedProjects.find(p => p.id === id);
         setProject(found);
-    }, [id]);
+
+        if(project) {
+            localStorage.setItem(`goal-${id}`, JSON.stringify(goalText));
+        }
+    }, [goalText, id, project]);
 
 
     if (!project) return <p style={{color: "white"}}>What project?</p>
@@ -82,29 +90,56 @@ export function ProjectTemplate({data}) {
             <ReminderText/>
             <br></br>
 
+            <br></br>
             <div class="task-priority-orange">
-                <textarea name="PriorityOrangeOne" value={goalText.PriorityOrangeOne} onChange={handleTextChange}/>
+                <textarea placeholder="What are you starting with?"  name="PriorityOrangeOne" value={goalText.PriorityOrangeOne.value}  readOnly={goalText.PriorityOrangeOne.readOnly} onChange={handleTextChange}/>
+                <button  onClick={() => setReadOnly("PriorityOrangeOne", true)}>Save</button>
+                <button onClick={() => setReadOnly("PriorityOrangeOne", false)}>Edit</button>
                 
             </div>
-
+            <br></br>
             <div class="task-priority-blue">
-                <textarea name="PriorityBlueOne" value={goalText.PriorityBlueOne} onChange={handleTextChange}/>
-                <textarea name="PriorityBlueTwo" value={goalText.PriorityBlueTwo} onChange={handleTextChange}/>
-                <textarea name="PriorityBlueThree" value={goalText.PriorityBlueThree} onChange={handleTextChange}/>
+                <textarea placeholder="What's the next step to milestone 2?" name="PriorityBlueOne" value={goalText.PriorityBlueOne.value} readOnly={goalText.PriorityBlueOne.readOnly} onChange={handleTextChange}/>
+                <button placeholder="What's the next step to milestone 2?"onClick={() => setReadOnly("PriorityBlueOne", true)}>Save</button>
+                <button onClick={() => setReadOnly("PriorityBlueOne", false)}>Edit</button>
+                <br></br>
+                <textarea placeholder="What's the next step to milestone 2?"name="PriorityBlueTwo" value={goalText.PriorityBlueTwo.value} readOnly={goalText.PriorityBlueTwo.readOnly} onChange={handleTextChange}/>
+                <button onClick={() => setReadOnly("PriorityBlueTwo", true)}>Save</button>
+                <button onClick={() => setReadOnly("PriorityBlueTwo", false)}>Edit</button>
+                <br></br>
+                <textarea placeholder="What's the next step to milestone 2?"name="PriorityBlueThree" value={goalText.PriorityBlueThree.value} readOnly={goalText.PriorityBlueThree.readOnly} onChange={handleTextChange}/>
+                <button onClick={() => setReadOnly("PriorityBlueThree", true)}>Save</button>
+                <button onClick={() => setReadOnly("PriorityBlueThree", false)}>Edit</button>
             </div>
+
+            <br></br>
 
             <div class="task-priority-orange">
-                <textarea name="PriorityOrangeTwo" value={goalText.PriorityOrangeTwo} onChange={handleTextChange}/>
+                <textarea placeholder="What is your halfway point?"name="PriorityOrangeTwo" value={goalText.PriorityOrangeTwo.value} readOnly={goalText.PriorityOrangeTwo.readOnly} onChange={handleTextChange}/>
+                <button onClick={() => setReadOnly("PriorityOrangeTwo", true)}>Save</button>
+                <button onClick={() => setReadOnly("PriorityOrangeTwo", false)}>Edit</button>
             </div>
+            <br></br>
 
             <div class="task-priority-blue">
-                <textarea name="PriorityBlueFour" value={goalText.PriorityBlueFour} onChange={handleTextChange}/>
-                <textarea name="PriorityBlueFive" value={goalText.PriorityBlueFive} onChange={handleTextChange}/>
-                <textarea name="PriorityBlueSix" value={goalText.PriorityBlueSix}  onChange={handleTextChange}/>
+                <textarea placeholder="final stretch! next steps to finish line." name="PriorityBlueFour" value={goalText.PriorityBlueFour.value} readOnly={goalText.PriorityBlueFour.readOnly} onChange={handleTextChange}/>
+                <button onClick={() => setReadOnly("PriorityBlueFour", true)}>Save</button>
+                <button onClick={() => setReadOnly("PriorityBlueFour", false)}>Edit</button>
+                <br></br>
+                <textarea placeholder="final stretch! next steps to finish line."name="PriorityBlueFive" value={goalText.PriorityBlueFive.value} readOnly={goalText.PriorityBlueFive.readOnly} onChange={handleTextChange}/>
+                <button onClick={() => setReadOnly("PriorityBlueFive", true)}>Save</button>
+                <button onClick={() => setReadOnly("PriorityBlueFive", false)}>Edit</button>
+                <br></br>
+                <textarea placeholder="final stretch! next steps to finish line."name="PriorityBlueSix" value={goalText.PriorityBlueSix.value} readOnly={goalText.PriorityBlueSix.readOnly}  onChange={handleTextChange}/>
+                <button onClick={() => setReadOnly("PriorityBlueSix", true)}>Save</button>
+                <button onClick={() => setReadOnly("PriorityBlueSix", false)}>Edit</button>
             </div>
+            <br></br>
 
             <div class="task-priority-orange">
-                <textarea name="PriorityOrangeThree" value={goalText.PriorityOrangeThree} onChange={handleTextChange}/>
+                <textarea placeholder="You made it! how do you know your project is done?"name="PriorityOrangeThree" value={goalText.PriorityOrangeThree.value} readOnly={goalText.PriorityOrangeThree.readOnly} onChange={handleTextChange}/>
+                <button onClick={() => setReadOnly("PriorityOrangeThree", true)}>Save</button>
+                <button onClick={() => setReadOnly("PriorityOrangeThree", false)}>Edit</button>
             </div>
             
 
