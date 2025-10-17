@@ -9,7 +9,11 @@ function PomorodoTimer() {
         <>
             <div>
                 <h1 class="pomoTitle">Pomorodo Timer</h1>
+
             </div>
+                <input type="text"></input>
+                <p> : </p>
+                <input type="text"></input>
 
             <Sidebar/>
         

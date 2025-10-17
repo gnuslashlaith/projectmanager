@@ -3,6 +3,10 @@ import {v4 as uuid} from "uuid";
 import '../assets/ProjectDashboard.css' 
 import {Link} from "react-router-dom"
 import {Sidebar} from '../Components/Sidebar'
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+
+
 
 function ProjectDashboard() {
 
@@ -11,11 +15,14 @@ function ProjectDashboard() {
         return storedProjects ? JSON.parse(storedProjects) : [];
     });
 
+    const options = ['Days', 'Weeks', 'Months']
     const [newProject, setNewProject] = useState({
         name: '',
         description: '',
         startDate: '',
         goalDate: '',
+        numberDate: '',
+        typeDate: ''
     });
 
     useEffect(() => {
@@ -71,6 +78,17 @@ function ProjectDashboard() {
                         <input className="dateStart" type="date" placeholder='Enter start date' value={newProject.startDate} onChange={(e) => setNewProject({...newProject, startDate: e.target.value})}></input>
                         <p class="label">To</p>
                         <input className="dateEnd" type="date" placeholder='Enter end date' value={newProject.goalDate} onChange={(e) => setNewProject({...newProject, goalDate: e.target.value})}></input>
+
+                        <input className="dateNumber" type="number" placeholder='Enter number of (days,weeks,months)' value={newProject.numberDate} onChange={(e) => setNewProject({...newProject, numberDate: e.target.value})}></input>
+                        <Autocomplete
+                            options={options}
+                            style={{width: 300}}
+                            renderInput={(params) =>
+                                <TextField{...params} label="choose type of date" variant="outlined"/>}
+
+                        />
+                            
+
 
                         <button class="add-project" onClick={addProject}>add project</button>
 
