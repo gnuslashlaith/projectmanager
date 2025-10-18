@@ -10,8 +10,6 @@ export function Sidebar() {
             <div class="tools">
                 <h3>Toolbar</h3>
                 <Link to="/"> Project Dashboard</Link>
-                <Link to="/todolist" href="https://github.com/gnuslashlaith">Daily Checklist</Link>
-                <Link to="/pomorodo">Pomorodo Timer</Link>
 
                 <h3>Information</h3>
                 <a href="https://github.com/gnuslashlaith/projectmanager">Source Code</a>
