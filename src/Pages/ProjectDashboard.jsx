@@ -15,7 +15,6 @@ function ProjectDashboard() {
         return storedProjects ? JSON.parse(storedProjects) : [];
     });
 
-    const options = ['Days', 'Weeks', 'Months']
     const [newProject, setNewProject] = useState({
         name: '',
         description: '',
@@ -79,15 +78,6 @@ function ProjectDashboard() {
                         <p class="label">To</p>
                         <input className="dateEnd" type="date" placeholder='Enter end date' value={newProject.goalDate} onChange={(e) => setNewProject({...newProject, goalDate: e.target.value})}></input>
 
-                        <input className="dateNumber" type="number" placeholder='Enter number of (days,weeks,months)' value={newProject.numberDate} onChange={(e) => setNewProject({...newProject, numberDate: e.target.value})}></input>
-                        <Autocomplete
-                            options={options}
-                            style={{width: 300}}
-                            renderInput={(params) =>
-                                <TextField{...params} label="choose type of date" variant="outlined"/>}
-
-                        />
-                            
 
 
                         <button class="add-project" onClick={addProject}>add project</button>

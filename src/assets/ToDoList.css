@@ -1,71 +1,96 @@
-.todo{
-    text-align: center;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  
-  }
-  
-  h1 {
-    font-size: 4rem;
-  }
-  
-  button {
-    font-size: 1.7rem;
-    font-weight: bold;
-    padding: 10px 20px;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.5s ease;
-  }
-  
-  .add-button {
-    background-color: aquamarine;
-  }
-  
-  .add-button:hover {
-    background-color: aqua;
-  }
-  
-  .delete-button {
-    background-color: rgb(253, 138, 88);
-  }
-  
-  .delete-button:hover {
-    background-color: rgb(165, 40, 40);
-  }
-  
-  .todoText {
-    font-size: 1.6rem;
-    padding: 10px;
-    border: 2px solid gold;
-    border-radius: 5px;
-    color: red;
-  
-  }
-  
-  ul {
-    padding: 0;
-  }
-  
-  li {
-    font-size: 2rem;
-    font-weight: bold;
-    padding: 25px;
-    background-color: whitesmoke;
-    margin-top: 20px;
-    border: 3px solid orange;
-    margin-left: 20%;
-    margin-right: 20%;
-    list-style-type: none;
-  }
-  
-  li button {
-    float: right;
-    margin-left: 10px;
-  
-  }
-  
-  li text {
-    float: left;
-  }
+.todo-header {
+  font-family: system-ui;
+  margin-left: 30vh;
+}
+
+.todo {
+  display: flex;
+  gap: 10px;
+  margin-left: 15vh;
+}
+
+.todo-full {
+  margin-left: 15vh;
+}
+
+.add-button {
+  font-family: system-ui;
+  background-color: transparent;
+  padding: 15px;
+  border-radius: 10px;
+  color: white;
+  border: 2px solid #ffb300;
+  font-weight: bold;
+
+}
+
+.add-button:hover {
+  background-color: #ff8f26;
+  transition: 0.3s;
+}
+
+.task-list {
+  width: 100%;
+  max-width: 500px; 
+  padding: 0;
+  margin-top: 2%;
+  margin-left: 15vh;
+}
+
+
+.task-list ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-list li {
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  padding: 10px 15px;
+  border-bottom: 1px solid #ddd;
+  background-color: #f9f9f9;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.task-list li .text {
+  flex-grow: 1; 
+  margin-right: 15vh; 
+  font-size: 16px;
+  color: #333;
+}
+
+
+.task-list li button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.task-list li .delete-button {
+  background-color: #e74c3c;
+  color: white;
+  margin-right: 5px; 
+}
+
+
+
+.task-list li button:hover {
+  opacity: 0.8;
+}
+
+.mark-as-done {
+  background-color: #59e73c;
+  color: white;
+  margin-right: 5px; 
+}
+
+.text {
+  font-family: system-ui;
+  font-weight: bold;
+  font-fize: 18px; 
+}

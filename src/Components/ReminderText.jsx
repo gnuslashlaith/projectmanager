@@ -4,19 +4,20 @@ import Sidebar from "./Sidebar";
 import '../assets/ProjectTemplate.css';
 
 
-export function ReminderText() {
+export function ReminderText({ projectId }) {
 
-        const [text, setText] = useState(null);
-
-        const handleChange = (event) => {
-            setText(event.target.value);
-            localStorage.setItem("input", event.target.value);
-        };
-
-        useEffect(() => {
-            setText(localStorage.getItem("input"));
-        }, []);
-
+    const key = `input-${projectId}`;
+    const [text, setText] = useState("");
+  
+    const handleChange = (event) => {
+      setText(event.target.value);
+      localStorage.setItem(key, event.target.value);
+    };
+  
+    useEffect(() => {
+      const saved = localStorage.getItem(key);
+      if (saved) setText(saved);
+    }, [key]); 
 
 
 

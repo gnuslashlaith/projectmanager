@@ -48,7 +48,15 @@ h3, h4 {
 
 }
 
+button {
+    border-radius: 5px;
+    background-color: black;
+    border: transparent;
+    padding: 10px;
+    
+}
 .img {
+
     display: inline-flex;
 }
 
