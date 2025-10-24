@@ -22,7 +22,8 @@ function ToDoList({ projectId }) {
     useEffect(() => {
       localStorage.setItem(tasksKey, JSON.stringify(tasks));
     }, [tasks, tasksKey]);
-  
+
+    // kinda freakiy1
     useEffect(() => {
       localStorage.setItem(doneKey, JSON.stringify(doneTasks));
     }, [doneTasks, doneKey]);
